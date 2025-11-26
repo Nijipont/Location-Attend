@@ -7,13 +7,13 @@ import { PropsWithChildren } from 'react';
 // Component จำลอง: Sidebar สำหรับครู
 const TeacherSidebar = () => (
   <aside className="w-64 bg-slate-800 text-white p-4 flex flex-col">
-    <h1 className="text-2xl font-bold mb-6">👨‍🏫 Teacher Panel</h1>
+    <h1 className="text-2xl font-bold mb-6">Teacher Panel</h1>
     <nav className="space-y-2">
       <Link href="/teacher-dashboard" className="block p-2 rounded hover:bg-slate-700 transition">
-        📊 Dashboard
+        Dashboard
       </Link>
       <Link href="/courses" className="block p-2 rounded hover:bg-slate-700 transition">
-        📚 My Courses
+        My Courses
       </Link>
     </nav>
   </aside>

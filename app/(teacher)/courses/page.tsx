@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function CoursesPage() {
   return (
     <section>
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">📚 My Courses</h1>
+      <h1 className="text-3xl font-bold mb-6 text-gray-800">My Courses</h1>
       
       <div className="space-y-4">
         <div className="flex justify-end items-center">
