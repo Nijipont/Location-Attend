@@ -1,6 +1,7 @@
 "use client"
 import React, { useState, useCallback } from "react";
 import { XCircle, CheckCircle } from 'lucide-react'; 
+import { createClient } from '@/lib/supabase/client';
 
 export function passwordValidation(password: string) {
   return {
@@ -56,7 +57,7 @@ export default function Register() {
     });
   }
 
-  const handleSubmit = useCallback((e) => {
+  const handleSubmit = useCallback(async (e) => {
     e.preventDefault();
 
     setIsSubmitting(true);
@@ -83,12 +84,47 @@ export default function Register() {
     }
 
     // --- Success Logic ---
-    console.log('Form data ready to submit:', formData);
+    try {
+      const supabase = createClient();
+      const {data, error: authError} = await supabase.auth.signUp({
+        email: formData.email,
+        password: formData.password
+      });
+
+      if(authError) {
+        throw authError
+      }
+      
+      const user = data?.user;
+
+      const {error: profilesError } = await supabase
+        .from('profiles')
+        .insert([
+          {
+            user_id: user.id, 
+            username: formData.username,
+            firstname: formData.firstname,
+            lastname: formData.lastname,
+          }
+        ])
+      if (profilesError) {
+            console.error('Profile insertion error:', profilesError);
+            throw profilesError; 
+        }
+
+      setMessage({ type: 'success', text: 'Registration successful! Please check your email to confirm your account.' });
+    } catch (error) {
+      console.error('Registration error:', error.message);
+        setMessage({ 
+            type: 'error', 
+            text: error.message.includes('already registered') 
+              ? 'This email is already registered.'
+              : error.message || 'An unexpected error occurred during registration.' 
+        });
+    } finally {
+      setIsSubmitting(false);
+    }
     
-    setTimeout(() => {
-        setMessage({ type: 'success', text: 'Registration successful! (Data logged to console)' });
-        setIsSubmitting(false);
-    }, 1500); 
     
   }, [formData]); 
   // Helper component to display requirements visually
