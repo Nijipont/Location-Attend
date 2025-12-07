@@ -109,6 +109,7 @@ export default function Register() {
             username: formData.username,
             firstname: formData.firstname,
             lastname: formData.lastname,
+            email: formData.email,
             role: userRole,
           }
         ])
