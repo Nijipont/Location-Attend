@@ -19,7 +19,6 @@ export default function Resetpassword() {
     const handleSubmit = useCallback(async (e) => {
         e.preventDefault();
 
-        // Simple validation
         if (!formData.email) {
             setMessage({ type: 'error', text: 'Please enter your email address.' });
             return;
@@ -62,7 +61,7 @@ export default function Resetpassword() {
         } finally {
             setIsSubmitting(false);
         }
-    }, [formData.email]); // Dependency on email ensures we use the latest value
+    }, [formData.email]); 
 
     return (
         <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-zinc-100 to-zinc-300 font-sans text-zinc-900 p-4">

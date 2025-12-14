@@ -17,7 +17,6 @@ export default function CreateCoursePage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 1. ดึง user
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -27,12 +26,11 @@ export default function CreateCoursePage() {
       return;
     }
 
-    // 2. INSERT ลง table courses
     const { error } = await supabase.from("courses").insert({
       course_id: courseId,
       course_name: courseName,
       description: description,
-      teacher_id: user.id, // เพิ่ม teacher_id
+      teacher_id: user.id, 
     });
 
     if (error) {
@@ -44,7 +42,6 @@ export default function CreateCoursePage() {
    setMessage("Course created successfully!");
    setTimeout(() => router.push("/teacher/courses"), 3000);
 
-    // 3. redirect กลับไปหน้า course list
     router.push("/teacher/courses");
   };
 
@@ -52,7 +49,7 @@ export default function CreateCoursePage() {
     <div className="p-8 max-w-4xl mx-auto">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-4xl font-extrabold text-gray-900">Create New Course</h1>
-        <Link href="/courses" className="text-teal-600 hover:text-teal-800 flex items-center">
+        <Link href="courses" className="text-teal-600 hover:text-teal-800 flex items-center">
           ← Back to Course List
         </Link>
       </div>
@@ -71,7 +68,6 @@ export default function CreateCoursePage() {
             />
           </div>
 
-          {/* Title */}
           <div>
             <label className="block mb-1 text-gray-700">Course Title</label>
             <input
@@ -83,7 +79,6 @@ export default function CreateCoursePage() {
             />
           </div>
 
-          {/* Description */}
           <div>
             <label className="block mb-1 text-gray-700">Short Description</label>
             <textarea
@@ -95,7 +90,6 @@ export default function CreateCoursePage() {
             ></textarea>
           </div>
 
-          {/* Submit */}
           <div className="flex justify-end">
             <button
               type="submit"

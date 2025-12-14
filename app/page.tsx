@@ -66,7 +66,7 @@ export default function Home() {
         <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-zinc-100 to-zinc-300 font-sans text-zinc-900 p-4">
             <main className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
                 <div className="space-y-6">
-                    <h1 className="text-3xl font-bold text-center">Welcome to <span className="text-blue-600">Location Attend</span></h1>
+                    <h1 className="text-3xl font-bold text-center">Welcome to <span className="text-blue-600">Network Based Attend</span></h1>
 
                     <div className="bg-zinc-50 p-6 rounded-xl shadow-inner">
                         <h2 className="text-xl font-semibold mb-4 text-center">Login</h2>

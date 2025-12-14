@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 export default function CourseDetail() {
-  const { id } = useParams(); // course_id
+  const { id } = useParams(); 
   const supabase = createClient();
 
   const [course, setCourse] = useState(null);
@@ -78,13 +78,11 @@ export default function CourseDetail() {
 
   return (
     <div className="p-6 space-y-6">
-      {/* Header */}
       <div>
         <h1 className="text-3xl font-bold">{course.course_name}</h1>
         <p className="text-gray-600">{course.description}</p>
       </div>
 
-      {/* Action Buttons */}
       <div className="flex gap-4">
         <a
           href={`/teacher/courses/${id}/add-session`}
@@ -92,16 +90,9 @@ export default function CourseDetail() {
         >
           ➕ Add Attendance Session
         </a>
-
-        <a
-          href={`/teacher/courses/${id}/attendance`}
-          className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
-        >
-          📋 View Attendance Sessions
-        </a>
+        
       </div>
 
-      {/* Session List */}
       <div className="p-4 border rounded-lg bg-gray-50 space-y-3">
         <h2 className="text-xl font-semibold">Attendance Sessions</h2>
 
@@ -111,8 +102,8 @@ export default function CourseDetail() {
           <div className="space-y-3">
             {sessions.map((s) => (
               <a
-                key={s.id}
-                href={`/teacher/courses/${id}/attendance/${s.id}`}
+                key={s.session_id}
+                href={`/teacher/courses/${id}/attendance/${s.session_id}`}
                 className="block p-3 border rounded-lg bg-white hover:bg-gray-100"
               >
                 <div className="font-semibold">
@@ -127,7 +118,6 @@ export default function CourseDetail() {
         )}
       </div>
 
-      {/* Add student to course */}
       <form
         onSubmit={handleAddStudent}
         className="p-4 border rounded-lg bg-gray-50 space-y-3"
